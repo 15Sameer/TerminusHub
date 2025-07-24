@@ -46,15 +46,9 @@ This document provides instructions for pushing this project to your GitHub acco
    - Go to https://github.com/15Sameer/TerminusHub to see your project on GitHub
    - Check that all files were uploaded correctly
 
-## GitHub Actions
+## GitHub Repository
 
-This project includes a GitHub Actions workflow file (`.github/workflows/release.yml`) that will automatically build the project and create releases when you push to the main branch.
-
-To enable GitHub Actions:
-
-1. Go to your repository on GitHub
-2. Click on the "Actions" tab
-3. Click "I understand my workflows, go ahead and enable them"
+Once your repository is set up on GitHub, you can manage it through the GitHub interface. You can track issues, manage pull requests, and more through the GitHub web interface.
 
 ## Making the Game Accessible via a Single Command
 
