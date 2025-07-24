@@ -10,25 +10,33 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y build-essential libncurses5-dev libncursesw5-dev
-    - name: Build
-      run: make
-    - name: Upload Linux Binary
-      uses: actions/upload-artifact@v2
-      with:
-        name: terminus-linux
-        path: terminus
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential libncurses5-dev libncursesw5-dev
+
+      - name: Build project
+        run: make
+
+      - name: Upload Linux binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: terminus-linux
+          path: ./terminus
 
   create-release:
-    needs: [build-linux]
+    needs: build-linux
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v2
-      - name: Create Release
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: terminus-linux
+          path: ./terminus-linux
+
+      - name: Create GitHub release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -38,7 +46,8 @@ jobs:
           release_name: Release v${{ github.run_number }}
           draft: false
           prerelease: false
-      - name: Upload Linux Release Asset
+
+      - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
