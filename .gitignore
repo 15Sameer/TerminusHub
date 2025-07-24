@@ -1,0 +1,24 @@
+# Build artifacts
+terminus
+build/*.o
+
+# Editor files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Dependency directories
+node_modules/
+
+# Debug files
+*.log
+*.dmp
+core
